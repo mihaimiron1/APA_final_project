@@ -1,0 +1,522 @@
+{
+    "users": [
+        {
+            "ID": 1,
+            "Email": "john.doe25@gmail.com",
+            "Nume": "John",
+            "Prenume": "Doe",
+            "Parola": "A1b2C3d4"
+        },
+        {
+            "ID": 2,
+            "Email": "emma.jones22@gmail.com",
+            "Nume": "Emma",
+            "Prenume": "Jones",
+            "Parola": "P4q5R6s7"
+        },
+        {
+            "ID": 3,
+            "Email": "sophia.wilson30@gmail.com",
+            "Nume": "Sophia",
+            "Prenume": "Wilson",
+            "Parola": "X7y8Z9a1"
+        },
+        {
+            "ID": 4,
+            "Email": "james.smith28@gmail.com",
+            "Nume": "James",
+            "Prenume": "Smith",
+            "Parola": "B1c2D3e4"
+        },
+        {
+            "ID": 5,
+            "Email": "mia.brown24@gmail.com",
+            "Nume": "Mia",
+            "Prenume": "Brown",
+            "Parola": "T6u7V8w9"
+        },
+        {
+            "ID": 6,
+            "Email": "liam.miller27@gmail.com",
+            "Nume": "Liam",
+            "Prenume": "Miller",
+            "Parola": "G1h2I3j4"
+        },
+        {
+            "ID": 7,
+            "Email": "olivia.taylor21@gmail.com",
+            "Nume": "Olivia",
+            "Prenume": "Taylor",
+            "Parola": "F4g5H6i7"
+        },
+        {
+            "ID": 8,
+            "Email": "noah.davis26@gmail.com",
+            "Nume": "Noah",
+            "Prenume": "Davis",
+            "Parola": "U1v2W3x4"
+        },
+        {
+            "ID": 9,
+            "Email": "ava.anderson29@gmail.com",
+            "Nume": "Ava",
+            "Prenume": "Anderson",
+            "Parola": "L8m9N0o1"
+        },
+        {
+            "ID": 10,
+            "Email": "william.johnson24@gmail.com",
+            "Nume": "William",
+            "Prenume": "Johnson",
+            "Parola": "K1l2M3n4"
+        },
+        {
+            "ID": 11,
+            "Email": "sophia.thomas23@gmail.com",
+            "Nume": "Sophia",
+            "Prenume": "Thomas",
+            "Parola": "Q4r5S6t7"
+        },
+        {
+            "ID": 12,
+            "Email": "jack.moore31@gmail.com",
+            "Nume": "Jack",
+            "Prenume": "Moore",
+            "Parola": "V7w8X9y1"
+        },
+        {
+            "ID": 13,
+            "Email": "isabella.jackson27@gmail.com",
+            "Nume": "Isabella",
+            "Prenume": "Jackson",
+            "Parola": "P1q2R3s4"
+        },
+        {
+            "ID": 14,
+            "Email": "lucas.harris22@gmail.com",
+            "Nume": "Lucas",
+            "Prenume": "Harris",
+            "Parola": "T5u6V7w8"
+        },
+        {
+            "ID": 15,
+            "Email": "mia.clark30@gmail.com",
+            "Nume": "Mia",
+            "Prenume": "Clark",
+            "Parola": "Z1a2B3c4"
+        },
+        {
+            "ID": 16,
+            "Email": "benjamin.wright29@gmail.com",
+            "Nume": "Benjamin",
+            "Prenume": "Wright",
+            "Parola": "M6n7O8p9"
+        },
+        {
+            "ID": 17,
+            "Email": "amelia.white26@gmail.com",
+            "Nume": "Amelia",
+            "Prenume": "White",
+            "Parola": "C4d5E6f7"
+        },
+        {
+            "ID": 18,
+            "Email": "elijah.hall23@gmail.com",
+            "Nume": "Elijah",
+            "Prenume": "Hall",
+            "Parola": "H1i2J3k4"
+        },
+        {
+            "ID": 19,
+            "Email": "emma.young25@gmail.com",
+            "Nume": "Emma",
+            "Prenume": "Young",
+            "Parola": "L5m6N7o8"
+        },
+        {
+            "ID": 20,
+            "Email": "oliver.king28@gmail.com",
+            "Nume": "Oliver",
+            "Prenume": "King",
+            "Parola": "F2g3H4i5"
+        },
+        {
+            "ID": 21,
+            "Email": "ava.baker22@gmail.com",
+            "Nume": "Ava",
+            "Prenume": "Baker",
+            "Parola": "G5h6I7j8"
+        },
+        {
+            "ID": 22,
+            "Email": "ethan.morris30@gmail.com",
+            "Nume": "Ethan",
+            "Prenume": "Morris",
+            "Parola": "H2i3J4k5"
+        },
+        {
+            "ID": 23,
+            "Email": "mia.jenkins24@gmail.com",
+            "Nume": "Mia",
+            "Prenume": "Jenkins",
+            "Parola": "M8n9O1p2"
+        },
+        {
+            "ID": 24,
+            "Email": "james.patterson28@gmail.com",
+            "Nume": "James",
+            "Prenume": "Patterson",
+            "Parola": "N3o4P5q6"
+        },
+        {
+            "ID": 25,
+            "Email": "sophia.evans29@gmail.com",
+            "Nume": "Sophia",
+            "Prenume": "Evans",
+            "Parola": "O4p5Q6r7"
+        },
+        {
+            "ID": 26,
+            "Email": "liam.bell25@gmail.com",
+            "Nume": "Liam",
+            "Prenume": "Bell",
+            "Parola": "P7q8R9s1"
+        },
+        {
+            "ID": 27,
+            "Email": "emma.morgan31@gmail.com",
+            "Nume": "Emma",
+            "Prenume": "Morgan",
+            "Parola": "Q5r6S7t8"
+        },
+        {
+            "ID": 28,
+            "Email": "noah.green27@gmail.com",
+            "Nume": "Noah",
+            "Prenume": "Green",
+            "Parola": "R4s5T6u7"
+        },
+        {
+            "ID": 29,
+            "Email": "isabella.edwards26@gmail.com",
+            "Nume": "Isabella",
+            "Prenume": "Edwards",
+            "Parola": "S1t2U3v4"
+        },
+        {
+            "ID": 30,
+            "Email": "lucas.ward24@gmail.com",
+            "Nume": "Lucas",
+            "Prenume": "Ward",
+            "Parola": "T7u8V9w1"
+        },
+        {
+            "ID": 31,
+            "Email": "amelia.hughes29@gmail.com",
+            "Nume": "Amelia",
+            "Prenume": "Hughes",
+            "Parola": "U2v3W4x5"
+        },
+        {
+            "ID": 32,
+            "Email": "elijah.bennett30@gmail.com",
+            "Nume": "Elijah",
+            "Prenume": "Bennett",
+            "Parola": "V6w7X8y9"
+        },
+        {
+            "ID": 33,
+            "Email": "mia.howard25@gmail.com",
+            "Nume": "Mia",
+            "Prenume": "Howard",
+            "Parola": "W1x2Y3z4"
+        },
+        {
+            "ID": 34,
+            "Email": "ethan.carter28@gmail.com",
+            "Nume": "Ethan",
+            "Prenume": "Carter",
+            "Parola": "X5y6Z7a8"
+        },
+        {
+            "ID": 35,
+            "Email": "sophia.phillips23@gmail.com",
+            "Nume": "Sophia",
+            "Prenume": "Phillips",
+            "Parola": "Y3z4A5b6"
+        },
+        {
+            "ID": 36,
+            "Email": "liam.mitchell30@gmail.com",
+            "Nume": "Liam",
+            "Prenume": "Mitchell",
+            "Parola": "Z9a1B2c3"
+        },
+        {
+            "ID": 37,
+            "Email": "emma.campbell26@gmail.com",
+            "Nume": "Emma",
+            "Prenume": "Campbell",
+            "Parola": "A6b7C8d9"
+        },
+        {
+            "ID": 38,
+            "Email": "noah.parker29@gmail.com",
+            "Nume": "Noah",
+            "Prenume": "Parker",
+            "Parola": "B4c5D6e7"
+        },
+        {
+            "ID": 39,
+            "Email": "isabella.bailey24@gmail.com",
+            "Nume": "Isabella",
+            "Prenume": "Bailey",
+            "Parola": "C7d8E9f1"
+        },
+        {
+            "ID": 40,
+            "Email": "lucas.patterson22@gmail.com",
+            "Nume": "Lucas",
+            "Prenume": "Patterson",
+            "Parola": "D2e3F4g5"
+        },
+        {
+            "ID": 41,
+            "Email": "amelia.perry27@gmail.com",
+            "Nume": "Amelia",
+            "Prenume": "Perry",
+            "Parola": "E7f8G9h1"
+        },
+        {
+            "ID": 42,
+            "Email": "ethan.reed26@gmail.com",
+            "Nume": "Ethan",
+            "Prenume": "Reed",
+            "Parola": "F4g5H6i7"
+        },
+        {
+            "ID": 43,
+            "Email": "mia.butler30@gmail.com",
+            "Nume": "Mia",
+            "Prenume": "Butler",
+            "Parola": "G8h9I1j2"
+        },
+        {
+            "ID": 44,
+            "Email": "noah.simmons28@gmail.com",
+            "Nume": "Noah",
+            "Prenume": "Simmons",
+            "Parola": "H6i7J8k9"
+        },
+        {
+            "ID": 45,
+            "Email": "sophia.russell23@gmail.com",
+            "Nume": "Sophia",
+            "Prenume": "Russell",
+            "Parola": "I3j4K5l6"
+        },
+        {
+            "ID": 46,
+            "Email": "liam.hughes22@gmail.com",
+            "Nume": "Liam",
+            "Prenume": "Hughes",
+            "Parola": "J8k9L0m1"
+        },
+        {
+            "ID": 47,
+            "Email": "emma.green30@gmail.com",
+            "Nume": "Emma",
+            "Prenume": "Green",
+            "Parola": "K5l6M7n8"
+        },
+        {
+            "ID": 48,
+            "Email": "olivia.james27@gmail.com",
+            "Nume": "Olivia",
+            "Prenume": "James",
+            "Parola": "L4m5N6o7"
+        },
+        {
+            "ID": 49,
+            "Email": "benjamin.taylor31@gmail.com",
+            "Nume": "Benjamin",
+            "Prenume": "Taylor",
+            "Parola": "M2n3O4p5"
+        },
+        {
+            "ID": 50,
+            "Email": "mia.brown29@gmail.com",
+            "Nume": "Mia",
+            "Prenume": "Brown",
+            "Parola": "N6o7P8q9"
+        },
+        {
+            "ID": 51,
+            "Email": "jack.davis23@gmail.com",
+            "Nume": "Jack",
+            "Prenume": "Davis",
+            "Parola": "O5p6Q7r8"
+        },
+        {
+            "ID": 52,
+            "Email": "amelia.morgan28@gmail.com",
+            "Nume": "Amelia",
+            "Prenume": "Morgan",
+            "Parola": "P8q9R0s1"
+        },
+        {
+            "ID": 53,
+            "Email": "ethan.clark24@gmail.com",
+            "Nume": "Ethan",
+            "Prenume": "Clark",
+            "Parola": "Q6r7S8t9"
+        },
+        {
+            "ID": 54,
+            "Email": "isabella.reed25@gmail.com",
+            "Nume": "Isabella",
+            "Prenume": "Reed",
+            "Parola": "R1s2T3u4"
+        },
+        {
+            "ID": 55,
+            "Email": "lucas.phillips26@gmail.com",
+            "Nume": "Lucas",
+            "Prenume": "Phillips",
+            "Parola": "S4t5U6v7"
+        },
+        {
+            "ID": 56,
+            "Email": "mia.bennett27@gmail.com",
+            "Nume": "Mia",
+            "Prenume": "Bennett",
+            "Parola": "T9u0V1w2"
+        },
+        {
+            "ID": 57,
+            "Email": "oliver.jenkins29@gmail.com",
+            "Nume": "Oliver",
+            "Prenume": "Jenkins",
+            "Parola": "U3v4W5x6"
+        },
+        {
+            "ID": 58,
+            "Email": "sophia.carter30@gmail.com",
+            "Nume": "Sophia",
+            "Prenume": "Carter",
+            "Parola": "V8w9X0y1"
+        },
+        {
+            "ID": 59,
+            "Email": "liam.evans31@gmail.com",
+            "Nume": "Liam",
+            "Prenume": "Evans",
+            "Parola": "W2x3Y4z5"
+        },
+        {
+            "ID": 60,
+            "Email": "amelia.parker22@gmail.com",
+            "Nume": "Amelia",
+            "Prenume": "Parker",
+            "Parola": "X6y7Z8a9"
+        },
+        {
+            "ID": 61,
+            "Email": "jack.green23@gmail.com",
+            "Nume": "Jack",
+            "Prenume": "Green",
+            "Parola": "Y4z5A6b7"
+        },
+        {
+            "ID": 62,
+            "Email": "emma.baker24@gmail.com",
+            "Nume": "Emma",
+            "Prenume": "Baker",
+            "Parola": "Z9a0B1c2"
+        },
+        {
+            "ID": 63,
+            "Email": "noah.james25@gmail.com",
+            "Nume": "Noah",
+            "Prenume": "James",
+            "Parola": "A5b6C7d8"
+        },
+        {
+            "ID": 64,
+            "Email": "olivia.morgan26@gmail.com",
+            "Nume": "Olivia",
+            "Prenume": "Morgan",
+            "Parola": "B3c4D5e6"
+        },
+        {
+            "ID": 65,
+            "Email": "liam.davis27@gmail.com",
+            "Nume": "Liam",
+            "Prenume": "Davis",
+            "Parola": "C7d8E9f1"
+        },
+        {
+            "ID": 66,
+            "Email": "sophia.jones28@gmail.com",
+            "Nume": "Sophia",
+            "Prenume": "Jones",
+            "Parola": "D2e3F4g5"
+        },
+        {
+            "ID": 67,
+            "Email": "amelia.taylor29@gmail.com",
+            "Nume": "Amelia",
+            "Prenume": "Taylor",
+            "Parola": "E5f6G7h8"
+        },
+        {
+            "ID": 68,
+            "Email": "oliver.wilson30@gmail.com",
+            "Nume": "Oliver",
+            "Prenume": "Wilson",
+            "Parola": "F9g0H1i2"
+        },
+        {
+            "ID": 69,
+            "Email": "lucas.clark31@gmail.com",
+            "Nume": "Lucas",
+            "Prenume": "Clark",
+            "Parola": "G3h4I5j6"
+        },
+        {
+            "ID": 70,
+            "Email": "mia.bennett22@gmail.com",
+            "Nume": "Mia",
+            "Prenume": "Bennett",
+            "Parola": "H7i8J9k0"
+        },
+        {
+            "Email": "fsdfgsdg@sdgdg",
+            "Parola": "adfgsgdsg",
+            "Nume": "",
+            "Prenume": "",
+            "ID": 71
+        },
+        {
+            "Email": "sdgdfg@sdgsg",
+            "Parola": "asfas",
+            "Nume": "",
+            "Prenume": "",
+            "ID": 72
+        },
+        {
+            "Email": "sdgdfg@sdgsgd",
+            "Parola": "sdfsdfsdfds",
+            "Nume": "",
+            "Prenume": "",
+            "ID": 73
+        },
+        {
+            "Email": "vrem_nota_10@gmail.com",
+            "Parola": "va_rugam)))",
+            "Nume": "",
+            "Prenume": "",
+            "ID": 74
+        }
+    ]
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chiupi-pupi Dating Site - Înregistrează-te</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="banner">
+        <div class="banner__content">
+            <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="Logo Chiupi-pupi"></a>
+            <div>
+                <a href="/"><p class="site-name">Chiupi-pupi</p></a>
+                <a href="/"><p class="motto">Găsește-ți perechea perfectă astăzi!</p></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Formularul de înregistrare centrat -->
+    <div class="register-page">
+        <p class="register-title">Înregistrează-te</p>
+        
+         <!-- Mesaj flash -->
+         {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}
+             <ul class="flash-messages">
+                 {% for category, message in messages %}
+                     <li class="{{ category }}">{{ message }}</li>
+                 {% endfor %}
+             </ul>
+         {% endif %}
+     {% endwith %}
+
+
+        <form action="/register" method="POST" class="register-form" onsubmit="return verificaParola()">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Introduceți email-ul">
+
+            <label for="password">Parolă</label>
+            <div class="password-container">
+                <input type="password" id="password" name="password" required placeholder="Introduceți parola">
+                <i class="fas fa-eye" id="toggle-password"></i>
+            </div>
+
+            <label for="confirm-password">Confirmă parola</label>
+            <div class="password-container">
+                <input type="password" id="confirm-password" name="confirm-password" required placeholder="Reintroduceți parola">
+                <i class="fas fa-eye" id="toggle-confirm-password"></i>
+            </div>
+
+            <p id="mesajEroare" class="error"></p> <!-- Mesaj de eroare -->
+
+            <button type="submit" class="action-button" style="width: 100%; margin-top: 15px;">Înregistrează-te</button>
+        </form>
+    </div>
+
+    <script>
+        // Toggle pentru câmpurile de parolă
+        const togglePassword = document.getElementById("toggle-password");
+        const passwordField = document.getElementById("password");
+
+        togglePassword.addEventListener("click", function () {
+            const type = passwordField.type === "password" ? "text" : "password";
+            passwordField.type = type;
+            this.classList.toggle("fa-eye-slash");
+        });
+
+        const toggleConfirmPassword = document.getElementById("toggle-confirm-password");
+        const confirmPasswordField = document.getElementById("confirm-password");
+
+        toggleConfirmPassword.addEventListener("click", function () {
+            const type = confirmPasswordField.type === "password" ? "text" : "password";
+            confirmPasswordField.type = type;
+            this.classList.toggle("fa-eye-slash");
+        });
+        
+        // Verifică dacă parolele coincid
+        function verificaParola() {
+            var parola = document.getElementById("password").value;
+            var parolaConfirmata = document.getElementById("confirm-password").value;
+            var mesajEroare = document.getElementById("mesajEroare");
+
+            if (parola !== parolaConfirmata) {
+                mesajEroare.textContent = "Parolele nu coincid. Te rugăm să le introduci din nou.";
+                return false; // Previne trimiterea formularului
+            } else {
+                mesajEroare.textContent = ""; // Șterge mesajul de eroare
+                return true; // Permite trimiterea formularului
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Create Profile</title>
+    
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            overflow-x: hidden; /* Ascunde scroll-ul orizontal */
+        }
+
+        body {
+            overflow-y: auto; /* Permite scroll pe verticală */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            color: #555;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #CC0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .form-container {
+            padding: 20px;
+        }
+    </style>
+    
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <!-- Banner -->
+    <div class="banner">
+        <div class="banner__content">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="Logo Chiupi-pupi">
+            <div>
+                <p class="site-name">Chiupi-pupi</p>
+                <p class="motto">Găsește-ți perechea perfectă astăzi!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Linie de delimitare -->
+    <div class="divider"></div>
+
+    <div class="container">
+        <div class="form-container">
+            <h2>Create Your Profile</h2>
+            <form id="createProfileForm" enctype="multipart/form-data">
+                <!-- Name -->
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required>
+
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required>
+
+                <!-- Age -->
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="18" required>
+
+                <!-- Height -->
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" name="height" required>
+
+                <!-- Hair Color -->
+                <label for="hair_color">Hair Color:</label>
+                <input type="text" id="hair_color" name="hair_color" required>
+
+                <!-- Interests -->
+                <label for="interests">Interests (comma-separated):</label>
+                <input type="text" id="interests" name="interests" placeholder="e.g., sports, music" required>
+
+                <!-- Preferred Gender -->
+                <label for="preferred_gender">Preferred Gender:</label>
+                <select id="preferred_gender" name="preferred_gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    
+                </select>
+
+                <!-- Age Range -->
+                <label for="min_age">Minimum Age Preference:</label>
+                <input type="number" id="min_age" name="min_age" min="18" required>
+
+                <label for="max_age">Maximum Age Preference:</label>
+                <input type="number" id="max_age" name="max_age" min="18" required>
+
+                <!-- Location -->
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+
+                <!-- Profile Picture -->
+                <label for="photo">Upload Profile Picture:</label>
+                <input type="file" id="photo" name="photo" accept="image/*" required>
+
+                <!-- Submit -->
+                <button type="submit" class="btn-submit">Save Profile</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#createProfileForm').submit(function(e) {
+                e.preventDefault(); // Previne trimiterea normală a formularului
+
+                var formData = new FormData(this);
+                
+                $.ajax({
+                    url: '/create_profile/{{ user_id }}',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        alert('Profile saved successfully!');
+                        window.location.href = "/profile/{{ user_id }}"; // Redirecționare către profil
+                    },
+                    error: function(xhr, status, error) {
+                        alert('There was an error saving your profile.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiupi-pupi Dating Site - Dating</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .banner {
+            height: 15%;
+            padding: 10px 20px;
+            background-color: #ff7f7f;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .banner__content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        /* Container pentru logo și text */
+    /* Container pentru logo și text */
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Spațiu între logo și text */
+    }
+
+    /* Logo */
+    .logo {
+        max-height: 70px;
+        width: auto;
+        animation: bounce 1.5s infinite; /* Animarea logo-ului */
+    }
+
+    /* Nume site */
+    .site-name {
+        font-family: 'Dancing Script', cursive;
+        font-size: 2.5rem; /* Dimensiune text */
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+    }
+
+    .navigation-links .nav-link {
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-left: 15px;
+            color: white;
+        }
+
+        .navigation-links .nav-link:nth-child(1) {
+            color: black;
+        }
+
+
+        .dating-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .photo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 350px;
+            height: 450px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        .action-button:hover {
+    background-color: #CC0000;
+    transform: scale(1.05); /* Animație hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-details {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .profile-details h2 {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+
+        .profile-details p {
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .action-button {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            width: 150px;
+            height: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .dislike-button {
+            background-color:  #007bff;
+            
+        }
+
+        .like-button {
+            background-color: #dc3545;
+        }
+
+        .action-button:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="banner__content">
+            <!-- Container pentru logo și text -->
+            <div class="logo-container">
+                <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="Chiupi-pupi Logo"></a>
+                <a href="/" class="site-name">Chiupi-pupi</a>
+            </div>
+            <nav class="navigation-links">
+                <a href="/dating_page" class="nav-link" style="color: #000;">Dating</a>
+                <a href="/friends" class="nav-link">Prieteni</a>
+                <a href="/profil" class="nav-link">Profil</a>
+            </nav>
+        </div>
+    </div>
+    
+
+    <div class="dating-page">
+        <div class="photo-container">
+            <img src="{{ recommended_user['photo_path'] }}" alt="Profil sugerat" class="profile-photo" id="profile-photo">
+        </div>
+        <div class="user-details">
+            <h2 id="profile-name">{{ recommended_user['first_name'] }} {{ recommended_user['last_name'] }}</h2>
+            <p id="profile-age">Vârstă: {{ recommended_user['age'] }}</p>
+            <p id="profile-location">Locație: {{ recommended_user['location'] }}</p>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="action-button dislike-button" id="dislike-button">Dislike</button>
+            <button class="action-button like-button" id="like-button">Like</button>
+        </div>
+    </div>
+    
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+                updateUserProfile(); // Afișează primul utilizator recomandat imediat ce pagina este încărcată
+            });
+        // Event listener pentru butoanele Like și Dislike
+        document.getElementById("like-button").addEventListener("click", function() {
+            // Trimitem cerere AJAX pentru a înregistra Like
+            fetch('/like_this_user')
+                .then(response => response.json())
+                .then(data => {
+                    // Actualizare foto profil și informații
+                    updateUserProfile();
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    
+        document.getElementById("dislike-button").addEventListener("click", function() {
+            // Trimitem cerere AJAX pentru a înregistra Dislike
+            fetch('/dislike_this_user')
+                .then(response => response.json())
+                .then(data => {
+                    // Actualizare foto profil și informații
+                    updateUserProfile();
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    
+        function updateUserProfile() {
+    fetch('/get_next_user')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch next user.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById("profile-photo").src = data.photo_path;
+            document.getElementById("profile-name").innerText = data.first_name + " " + data.last_name;
+            document.getElementById("profile-age").innerText = "Vârstă: " + data.age;
+            document.getElementById("profile-location").innerText = "Locație: " + data.location;
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+    </script>
+    
+    
+</body>
+</html>

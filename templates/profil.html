@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiupi-pupi Dating Site - Profil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .banner {
+            height: 15%;
+            padding: 10px 20px;
+            background-color: #ff7f7f;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .banner__content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            max-height: 70px;
+            width: auto;
+            animation: bounce 1.5s infinite;
+        }
+
+        .site-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .navigation-links .nav-link {
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-left: 15px;
+            color: white;
+        }
+        .navigation-links .nav-link:nth-child(3) {
+            color: black;
+        }
+
+        .profile-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .profile-container {
+            display: flex;
+            gap: 40px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding-left: 20px;
+        }
+
+        .profile-details h2 {
+            font-size: 1.8rem;
+            margin: 10px 0;
+        }
+
+        .profile-details p {
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        .preferences-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .preferences-list li {
+            margin: 5px 0;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="banner__content">
+            <div class="logo-container">
+                <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="Chiupi-pupi Logo"></a>
+                <a href="/" class="site-name">Chiupi-pupi</a>
+            </div>
+            <nav class="navigation-links">
+                <a href="/dating_page" class="nav-link">Dating</a>
+                <a href="/friends" class="nav-link">Prieteni</a>
+                <a href="/profile" class="nav-link">Profil</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="profile-page">
+        <div class="profile-container">
+            <div class="photo-container">
+                <img src="{{ photo_path }}" alt="Fotografie Profil" class="profile-photo">
+            </div>
+            <div class="profile-details">
+                <h2>{{ first_name }} {{ last_name }}</h2>
+                <p><strong>Vârstă:</strong> {{ age }}</p>
+                <p><strong>Locație:</strong> {{ location }}</p>
+                <p><strong>Înălțime:</strong> {{ height }} cm</p>
+                <p><strong>Interese:</strong></p>
+                <ul class="preferences-list">
+                    {% for interest in interests %}
+                        <li>{{ interest }}</li>
+                    {% endfor %}
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+    
+    
+</body>
+</html>

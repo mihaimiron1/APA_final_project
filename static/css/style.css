@@ -1,0 +1,417 @@
+/* Resetare margini și padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+}
+.banner a {
+    color: #fff; /* Setează culoarea albă pentru link-uri */
+}
+
+
+/* Setați site-ul să ocupe 100% din dimensiunea ecranului */
+html, body {
+    height: 100%;
+    overflow: hidden; /* Elimină scroll-ul */
+}
+
+/* Fundal general */
+body {
+    background: linear-gradient(180deg, #f9f9f9, #e8e8e8); /* Gradient subtil */
+    font-family: Arial, sans-serif;
+}
+
+/* Stil pentru banner */
+.banner {
+    background: linear-gradient(90deg, #FF5733, #FF0000); /* Gradient modern */
+    text-align: center;
+    height: 20%; /* Banner mai mic */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.banner__content {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Spațiu între logo și text */
+}
+
+.logo {
+    width: 100px; /* Dimensiunea logo-ului */
+    animation: bounce 1.5s infinite; /* Animația logo-ului */
+}
+
+.site-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem; /* Text mare */
+    font-weight: bold;
+}
+
+.motto {
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif;
+    color: #ffe6e6; /* Text subtil sub banner */
+}
+
+/* Linie de delimitare sub banner */
+.divider {
+    height: 2px;
+    background-color: #ccc;
+    width: 100%; /* Lățime pe tot ecranul */
+}
+
+/* Stil pentru containerul de butoane */
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%; /* Restul ecranului */
+    justify-content: flex-start; /* Butoanele mai jos */
+    padding-top: 150px; /* Mai jos față de anterior */
+}
+
+/* Stil pentru butoane */
+.action-button {
+    background-color: #FF0000;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 15px 60px; /* Dimensiuni uniforme */
+    margin: 10px 0; /* Margini între butoane */
+    border: none;
+    border-radius: 8px; /* Colțuri rotunjite */
+    cursor: pointer;
+    display: inline-flex; /* Folosește flexbox pentru aliniere */
+    justify-content: center; /* Aliniaza textul pe orizontală */
+    align-items: center; /* Aliniaza textul pe verticală */
+    transition: all 0.3s ease;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    /* Setați site-ul să ocupe 100% din dimensiunea ecranului */
+    html, body {
+        height: 100%;
+        overflow: hidden; /* Elimină scroll-ul */
+    }
+    
+    /* Fundal general */
+    body {
+        background: #f9f9f9; /* Culoare implicită */
+        font-family: Arial, sans-serif;
+    }
+    
+    /* Stil pentru banner */
+    .banner {
+        background: linear-gradient(90deg, #FF5733, #FF0000); /* Gradient modern */
+        text-align: center;
+        height: 20%; /* Banner mai mic */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+    }
+    
+    .banner__content {
+        display: flex;
+        align-items: center;
+        gap: 15px; /* Spațiu între logo și text */
+    }
+    
+    .logo {
+        width: 100px; /* Dimensiunea logo-ului */
+        animation: bounce 1.5s infinite; /* Animație pentru logo */
+    }
+    
+    .site-name {
+        font-family: 'Dancing Script', cursive;
+        font-size: 3.5rem; /* Text mare */
+        font-weight: bold;
+    }
+    
+    .motto {
+        font-size: 1.2rem;
+        font-family: Arial, sans-serif;
+        color: #ffe6e6; /* Text subtil sub banner */
+    }
+    
+    /* Linie de delimitare sub banner */
+    .divider {
+        height: 2px;
+        background-color: #ccc;
+        width: 100%; /* Lățime completă */
+    }
+    
+    /* Secțiunea cu imagine de fundal */
+    .background-section {
+        height: 80%; /* Restul ecranului */
+        background: url('images/back') no-repeat center center; /* Imagine de fundal */
+        background-size: cover; /* Acoperă toată secțiunea */
+    }
+     /* Spațiu ușor redus între ele */
+    border: none;
+    border-radius: 8px; /* Colțuri rotunjite */
+    cursor: pointer;
+    transition: all 0.3s ease;/* Resetare margini și padding */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    /* Setați site-ul să ocupe 100% din dimensiunea ecranului */
+    html, body {
+        height: 100%;
+        overflow: hidden; /* Elimină scroll-ul */
+    }
+    
+    /* Fundal general */
+    body {
+        background: #f9f9f9; /* Culoare implicită */
+        font-family: Arial, sans-serif;
+    }
+    
+    /* Stil pentru banner */
+    .banner {
+        background: linear-gradient(90deg, #FF5733, #FF0000); /* Gradient modern */
+        text-align: center;
+        height: 20%; /* Banner mai mic */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+    }
+    
+    .banner__content {
+        display: flex;
+        align-items: center;
+        gap: 15px; /* Spațiu între logo și text */
+    }
+    
+    .logo {
+        width: 100px; /* Dimensiunea logo-ului */
+        animation: bounce 1.5s infinite; /* Animație pentru logo */
+    }
+    
+    .site-name {
+        font-family: 'Dancing Script', cursive;
+        font-size: 3.5rem; /* Text mare */
+        font-weight: bold;
+    }
+    
+    .motto {
+        font-size: 1.2rem;
+        font-family: Arial, sans-serif;
+        color: #ffe6e6; /* Text subtil sub banner */
+    }
+    
+    /* Linie de delimitare sub banner */
+    .divider {
+        height: 2px;
+        background-color: #ccc;
+        width: 100%; /* Lățime completă */
+    }
+    
+    /* Secțiunea cu imagine de fundal */
+    .background-section {
+        height: 80%; /* Restul ecranului */
+        background: url('images/back') no-repeat center center; /* Imagine de fundal */
+        background-size: cover; /* Acoperă toată secțiunea */
+    }
+    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow subtil */
+    width: 290px; /* Lungime uniformă */
+}
+
+.action-button:hover {
+    background-color: #CC0000;
+    transform: scale(1.05); /* Animație hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Animația pentru logo */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+/* Centrăm pagina de login */
+.login-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 30%); /* Ocupă restul ecranului sub banner */
+    background: linear-gradient(180deg, #f9f9f9, #e8e8e8); /* Fundal */
+}
+
+
+/* Titlul formularului */
+.login-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color:#000;
+}
+
+
+/* Formular */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px; /* Dimensiune fixă pentru formular */
+}
+
+
+/* Inputuri */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+/* Caseta de parolă cu icon */
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Icon în interiorul casetei */
+.password-container i {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
+
+/* Hover pe icon */
+.password-container i:hover {
+    color: #FF5733;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.register-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.register-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+.register-form {
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+.flash-messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.flash-messages li {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.flash-messages .error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.flash-messages .success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+
+/* Banner mai mic */
+.small-banner {
+    height: 15%; /* Reducerea dimensiunii bannerului */
+    padding: 10px 20px;
+}
+
+.small-banner__content {
+    justify-content: space-between;
+}
+
+.small-logo {
+    width: 50px;
+}
+
+/* Link-uri de navigare */
+.navigation-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-link.active {
+    background-color: black;
+}
+

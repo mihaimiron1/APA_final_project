@@ -1,0 +1,71 @@
+ID,Gender,Age,Height,Hair_Color,Interests,Preferred_Gender,Age_Preference_Range,Location,Photo_Path
+1,M,25,180,Brown,"sports music",F,"(20, 30)",Bucharest,https://i.postimg.cc/XYKvwxHj/image1.jpg
+2,F,22,165,Blonde,"reading travel",M,"(20, 35)",Cluj,https://i.postimg.cc/tgYMHvM9/img2.webp
+3,F,30,170,Black,"movies cooking",M,"(25, 40)",Timisoara,https://i.postimg.cc/0yrCwhgX/DALL-E-2025-01-17-20-37-23-A-digital-portrait-of-a-30-year-old-woman-with-black-hair-styled-in-a.webp
+4,M,28,175,Red,"hiking photography",F,"(22, 32)",Brasov,https://i.postimg.cc/qB5q7FLv/img4.webp
+5,F,24,160,Brown,"music yoga",M,"(20, 30)",Constanta,https://i.postimg.cc/tgYMHvM9/img2.webp
+6,M,27,185,Blonde,"sports video games",F,"(23, 28)",Oradea,photos/user6.jpg
+7,F,21,168,Black,"drawing dancing",M,"(20, 25)",Bucharest,photos/user7.jpg
+8,M,26,178,Brown,"cooking travel",F,"(22, 30)",Iasi,photos/user8.jpg
+9,F,29,172,Red,"reading gardening",M,"(25, 35)",Arad,photos/user9.jpg
+10,M,24,183,Blonde,"swimming music",F,"(20, 28)",Sibiu,photos/user10.jpg
+11,F,23,158,Black,"travel yoga",M,"(21, 28)",Timisoara,photos/user11.jpg
+12,M,31,177,Brown,"hiking sports",F,"(25, 35)",Bucharest,photos/user12.jpg
+13,F,27,164,Blonde,"dancing cooking",M,"(24, 32)",Cluj,photos/user13.jpg
+14,M,22,182,Black,"video games photography",F,"(20, 25)",Constanta,photos/user14.jpg
+15,F,30,169,Red,"yoga movies",M,"(28, 35)",Oradea,photos/user15.jpg
+16,M,29,179,Brown,"reading sports",F,"(26, 32)",Iasi,photos/user16.jpg
+17,F,26,162,Blonde,"music travel",M,"(23, 30)",Bucharest,photos/user17.jpg
+18,M,23,181,Black,"hiking video games",F,"(21, 26)",Cluj,photos/user18.jpg
+19,F,25,170,Brown,"cooking photography",M,"(22, 30)",Brasov,photos/user19.jpg
+20,M,28,180,Blonde,"travel music",F,"(24, 32)",Timisoara,photos/user20.jpg
+21,F,22,160,Black,"drawing yoga",M,"(20, 30)",Iasi,photos/user21.jpg
+22,M,30,176,Brown,"sports reading",F,"(25, 35)",Arad,photos/user22.jpg
+23,F,24,168,Red,"music travel",M,"(20, 28)",Sibiu,photos/user23.jpg
+24,M,27,180,Blonde,"cooking hiking",F,"(23, 32)",Brasov,photos/user24.jpg
+25,F,29,165,Blonde,"photography movies",M,"(26, 35)",Oradea,photos/user25.jpg
+26,M,25,182,Black,"video games music",F,"(22, 30)",Constanta,photos/user26.jpg
+27,F,31,159,Red,"gardening reading",M,"(27, 38)",Cluj,photos/user27.jpg
+28,M,26,174,Brown,"dancing travel",F,"(22, 28)",Timisoara,photos/user28.jpg
+29,F,28,167,Black,"yoga drawing",M,"(24, 30)",Bucharest,photos/user29.jpg
+30,M,24,181,Blonde,"music photography",F,"(20, 27)",Iasi,photos/user30.jpg
+31,F,23,170,Brown,"hiking sports",M,"(21, 30)",Arad,photos/user31.jpg
+32,M,28,179,Black,"reading travel",F,"(24, 32)",Cluj,photos/user32.jpg
+33,F,26,160,Blonde,"movies music",M,"(23, 30)",Brasov,photos/user33.jpg
+34,M,27,183,Red,"sports gardening",F,"(25, 32)",Oradea,photos/user34.jpg
+35,F,22,158,Brown,"cooking yoga",M,"(20, 28)",Sibiu,photos/user35.jpg
+36,M,30,180,Blonde,"travel photography",F,"(26, 35)",Timisoara,photos/user36.jpg
+37,F,25,168,Black,"music drawing",M,"(22, 30)",Bucharest,photos/user37.jpg
+38,M,29,177,Brown,"video games movies",F,"(25, 33)",Iasi,photos/user38.jpg
+39,F,24,169,Red,"yoga reading",M,"(21, 28)",Cluj,photos/user39.jpg
+40,M,23,174,Blonde,"photography travel",F,"(20, 26)",Constanta,photos/user40.jpg
+41,F,28,166,Blonde,"cooking dancing",M,"(24, 32)",Oradea,photos/user41.jpg
+42,M,26,182,Brown,"hiking gardening",F,"(22, 30)",Bucharest,photos/user42.jpg
+43,F,30,165,Black,"sports movies",M,"(27, 35)",Arad,photos/user43.jpg
+44,M,27,179,Red,"music yoga",F,"(23, 32)",Timisoara,photos/user44.jpg
+45,F,23,160,Blonde,"drawing travel",M,"(21, 27)",Iasi,photos/user45.jpg
+46,M,24,181,Brown,"video games photography",F,"(20, 28)",Cluj,photos/user46.jpg
+47,F,29,170,Red,"reading music",M,"(26, 34)",Brasov,photos/user47.jpg
+48,M,28,180,Black,"sports cooking",F,"(25, 33)",Constanta,photos/user48.jpg
+49,F,26,167,Blonde,"yoga movies",M,"(23, 31)",Timisoara,photos/user49.jpg
+50,M,30,178,Brown,"hiking travel",F,"(26, 36)",Bucharest,photos/user50.jpg
+51,F,25,160,Black,"dancing music",M,"(22, 30)",Sibiu,photos/user51.jpg
+52,M,31,180,Blonde,"photography reading",F,"(27, 35)",Iasi,photos/user52.jpg
+53,F,24,169,Brown,"movies cooking",M,"(20, 28)",Arad,photos/user53.jpg
+54,M,22,181,Red,"sports video games",F,"(20, 25)",Cluj,photos/user54.jpg
+55,F,27,164,Blonde,"yoga travel",M,"(24, 30)",Brasov,photos/user55.jpg
+56,M,23,179,Brown,"cooking music",F,"(21, 27)",Bucharest,photos/user56.jpg
+57,F,28,170,Red,"reading drawing",M,"(25, 34)",Constanta,photos/user57.jpg
+58,M,26,176,Black,"travel dancing",F,"(22, 30)",Oradea,photos/user58.jpg
+59,F,22,160,Brown,"yoga photography",M,"(20, 26)",Sibiu,photos/user59.jpg
+60,M,29,181,Blonde,"movies hiking",F,"(25, 32)",Timisoara,photos/user60.jpg
+61,F,30,168,Black,"cooking reading",M,"(27, 38)",Iasi,photos/user61.jpg
+62,M,24,175,Red,"music travel",F,"(20, 28)",Cluj,photos/user62.jpg
+63,F,31,162,Blonde,"yoga dancing",M,"(28, 35)",Brasov,photos/user63.jpg
+64,M,28,177,Brown,"photography gardening",F,"(25, 33)",Bucharest,photos/user64.jpg
+65,F,23,159,Red,"sports drawing",M,"(21, 27)",Constanta,photos/user65.jpg
+66,M,26,183,Black,"hiking movies",F,"(22, 30)",Arad,photos/user66.jpg
+67,F,25,165,Blonde,"travel yoga",M,"(22, 29)",Iasi,photos/user67.jpg
+68,M,29,170,Brown,"reading music",F,"(25, 34)",Timisoara,photos/user68.jpg
+69,F,24,163,Red,"cooking photography",M,"(21, 30)",Cluj,photos/user69.jpg
+70,M,30,180,Black,"dancing travel",F,"(26, 38)",Bucharest,photos/user70.jpg

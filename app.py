@@ -1,0 +1,341 @@
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+import json
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import StandardScaler
+import pandas as pd
+from backend.main import load_data, recommend_users_by_id, interact_with_recommended_users,  give_friends, calculate_similarity
+
+from sklearn.preprocessing import MultiLabelBinarizer
+
+app = Flask(__name__)
+app.secret_key = '564521751a02c0e0e5f324d5a850a38e6ba1873a7a1e3027'
+
+
+# Load the necessary data and similarity matrix globally
+
+
+# Citirea fișierului JSON cu utilizatori
+def load_users():
+    try:
+        with open('login_users.json', 'r') as file:
+            return json.load(file)['users']
+    except FileNotFoundError:
+        return []
+
+
+# Ruta pentru pagina principală
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+
+
+
+
+
+
+
+
+@app.route('/profil', methods=['GET', 'POST'])
+def profil():
+    user_id = session.get('user_id')
+    if not user_id:
+        flash("Te rugăm să te conectezi mai întâi!", 'error')
+        return redirect(url_for('login'))
+
+    # Încarcă datele utilizatorilor
+    users_json = load_users()
+    user = next((u for u in users_json if u['ID'] == user_id), None)
+    
+    if not user:
+        flash("Utilizatorul nu a fost găsit!", 'error')
+        return redirect(url_for('index'))
+
+    # Încarcă date suplimentare pentru utilizator
+    data, _, _ = load_data()
+    user_data = data[data['ID'] == user_id].iloc[0]
+    
+    data_orig = pd.read_csv('APA_PR\dating_data.csv')
+    user_orig_info = data_orig[data_orig['ID'] == user_id].iloc[0]
+
+
+    
+    # Preia informațiile de profil
+    first_name = user["Prenume"]
+    last_name = user["Nume"]
+    age = int(user_data["Age"])
+    location = user_data["Location"]
+    photo_path = user_data["Photo_Path"]
+    height = user_data["Height"]
+    interests = user_orig_info["Interests"]
+    
+    if request.method == 'POST':
+        # Actualizează profilul
+        updated_first_name = request.form['first_name']
+        updated_last_name = request.form['last_name']
+        updated_location = request.form['location']
+        update_height = request.form['height']
+        update_interests = request.form['interests']
+        
+
+        # Actualizează datele utilizatorului în fișierul JSON
+        user['Prenume'] = updated_first_name
+        user['Nume'] = updated_last_name
+        user_data['Location'] = updated_location
+        user_data['Height'] = update_height
+        user_data['Interests'] = update_interests
+        
+        # Salvează modificările
+        with open('login_users.json', 'w') as file:
+            json.dump({'users': users_json}, file, indent=4)
+        
+        flash("Profilul a fost actualizat cu succes!", 'success')
+        return redirect(url_for('profil'))
+    interests = interests.split()
+    return render_template('profil.html', first_name=first_name, last_name=last_name, age=age, location=location, photo_path=photo_path, height=height, interests=interests)
+
+
+
+
+@app.route('/friends')
+def friends():
+    friends_list = []
+
+    user_id = session.get('user_id')
+    if not user_id:
+        flash("Te rugăm să te conectezi mai întâi!", 'error')
+        return redirect(url_for('login'))
+    users_json = load_users()
+    data, interactions_matrix, _ = load_data()
+    user_friends= give_friends(user_id, interactions_matrix)
+ 
+    
+    for friend_id in user_friends:
+        user_info = next((user for user in users_json if user["ID"] == friend_id), None)
+        if not user_info:
+            continue
+        friend_data = data[data['ID'] == friend_id]
+        if friend_data.empty:
+            continue
+
+        friend_row = friend_data.iloc[0]
+        friends_list.append({
+            "first_name": user_info["Prenume"],
+            "last_name": user_info["Nume"],
+            "age": int(friend_row["Age"]),
+            "location": friend_row["Location"],
+            "photo_path": friend_row["Photo_Path"]
+        })
+
+
+    #print("Filtered data IDs (types):", filtered_data['ID'].apply(type).unique())
+    return render_template('friends.html', friends=friends_list)
+
+
+# Ruta pentru pagina de înregistrare
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        users = load_users()
+        for user in users:
+            if user['Email'] == email:
+                flash("Acest email este deja înregistrat!", 'error')
+                return redirect(url_for('register'))
+
+        new_user = {
+            'Email': email,
+            'Parola': password,
+            'Nume': '',
+            'Prenume': '',
+            'ID': len(users) + 1
+        }
+
+        users.append(new_user)
+        with open('login_users.json', 'w') as file:
+            json.dump({'users': users}, file, indent=4)
+
+        return redirect(url_for('create_profile', user_id=new_user['ID']))
+
+    return render_template('register.html')
+
+
+
+
+@app.route('/create_profile/<int:user_id>', methods=['GET', 'POST'])
+def create_profile(user_id):
+    print(f"User ID: {user_id} - Route accessed")  # Check if route is accessed
+
+    if request.method == 'POST':
+        print("POST method accessed")
+
+        # Retrieve form data
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        age = request.form['age']
+        height = request.form['height']
+        hair_color = request.form['hair_color']
+        interests = request.form['interests'].split(",")  # Split interests by comma
+        preferred_gender = request.form['preferred_gender']
+        age_min = request.form['min_age']
+        age_max = request.form['max_age']
+        location = request.form['location']
+
+        # Handling the uploaded photo
+        photo = request.files['photo']
+        photo_path = 'static/images/' + photo.filename
+        photo.save(photo_path)
+
+        # Process user data, update, save to file, etc.
+        # (Your logic for processing and saving user data goes here)
+
+        flash("Profile successfully created!", 'success')
+        return redirect(url_for('profile', user_id=user_id))
+
+    # For GET request, render the profile creation form
+    return render_template('create_profile.html', user_id=user_id)
+
+
+
+
+# Ruta pentru pagina de conectare
+@app.route('/conect', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        users = load_users()
+        user_found = None
+        for user in users:
+            if user['Email'] == email and user['Parola'] == password:
+                user_found = user
+                break
+        if user_found:
+            session['user_id'] = user_found['ID']
+            
+            return redirect(url_for('dating_page'))  # Redirect to dating page
+        else:
+            flash("Email sau parolă incorectă!", 'error')
+    return render_template('conect.html')
+
+
+@app.route('/dating_page', methods=['GET', 'POST'])
+def dating_page():
+    user_id = session.get('user_id')
+    if not user_id:
+        flash("Te rugăm să te conectezi mai întâi!", 'error')
+        return redirect(url_for('login'))
+    
+
+    print(f"Current User ID: {user_id}")
+    data, interactions_matrix, interests_df = load_data()
+    similarity_matrix = calculate_similarity(data, interests_df)
+    recommended_user = recommend_users_by_id(user_id, data, similarity_matrix, interactions_matrix)
+    print(f"Recommended Users: {recommended_user[0]['ID']}")
+    print(f"Recommended Users: {recommended_user[0]['Photo_Path']}")  
+
+    if not recommended_user:
+        return jsonify({"error": "No recommended users found."}), 404
+
+    users = load_users()
+    user = next((u for u in users if u['ID'] == recommended_user[0]['ID']), None)
+
+    if user:
+        session['user_recom_id'] = recommended_user[0]['ID']
+        first_name = user['Prenume']
+        last_name = user['Nume']
+        location = recommended_user[0]['Location']
+        age = recommended_user[0]['Age']
+        photo = recommended_user[0]['Photo_Path']
+    else:
+        first_name = "Necunoscut"
+        last_name = "Necunoscut"
+        location = ""
+        age = 0
+        photo = ""
+
+    return render_template('dating_page.html', recommended_user={
+        'photo_path': photo,
+        'first_name': first_name,
+        'last_name': last_name,
+        'age': age,
+        'location': location
+    })
+
+
+@app.route('/get_next_user', methods=['GET'])
+def get_next_user():
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({"error ": "User not logged in"}), 401
+
+    print(f"Current User ID: {user_id}")
+    data, interactions_matrix, interests_df = load_data()
+    similarity_matrix = calculate_similarity(data, interests_df)
+    recommended_user = recommend_users_by_id(user_id, data, similarity_matrix, interactions_matrix)
+    print(f"Recommended Users: {recommended_user[0]['ID']}")
+    print(f"Recommended Users: {recommended_user[0]['Photo_Path']}")  
+
+    if not recommended_user:
+        return jsonify({"error": "No recommended users found."}), 404
+
+    users = load_users()
+    user = next((u for u in users if u['ID'] == recommended_user[0]['ID']), None)
+
+    if user:
+        session['user_recom_id'] = recommended_user[0]['ID']
+        return jsonify({
+            'photo_path': recommended_user[0]['Photo_Path'],
+            'first_name': user['Prenume'],
+            'last_name': user['Nume'],
+            'age': recommended_user[0]['Age'],
+            'location': recommended_user[0]['Location']
+        })
+    else:
+        return jsonify({"error": "User details not found."}), 404
+
+    
+
+
+@app.route('/like_this_user', methods=['GET'])
+def like_this_user():
+    user_id = session.get('user_id')
+    user_recod_id=session.get('user_recom_id')
+    if not user_id:
+        return jsonify({"error": "User not logged in"}), 401
+    if not user_recod_id:
+        return jsonify({"error": "Recommended user not found"}), 402
+
+
+    # Obținem recomandările pe baza ID-ului utilizatorului
+    _, interactions_matrix, _ = load_data()
+    interact_with_recommended_users(user_id, user_recod_id, interactions_matrix, 1)
+
+    return redirect(url_for('get_next_user'))
+
+
+
+
+@app.route('/dislike_this_user', methods=['GET'])
+def dislike_this_user():
+    user_id = session.get('user_id')
+    user_recod_id=session.get('user_recom_id')
+    if not user_id:
+        return jsonify({"error": "User not logged in"}), 401
+    if not user_recod_id:
+        return jsonify({"error": "Recommended user not found"}), 402
+
+
+    # Obținem recomandările pe baza ID-ului utilizatorului
+    _, interactions_matrix, _ = load_data()
+    interact_with_recommended_users(user_id, user_recod_id, interactions_matrix, 0.5)
+    
+    return redirect(url_for('get_next_user'))
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
