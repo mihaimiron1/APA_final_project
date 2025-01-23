@@ -3,7 +3,7 @@ import json
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
-from backend.main import load_data, recommend_users_by_id, interact_with_recommended_users,  give_friends, calculate_similarity
+from backend.main import load_data, recommend_users_by_id, interact_with_recommended_users,  give_friends, calculate_similarity, get_vector3, add_user_in_data
 
 from sklearn.preprocessing import MultiLabelBinarizer
 
