@@ -1,7 +1,35 @@
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
+import numpy as np
 from sklearn.preprocessing import MultiLabelBinarizer
+from opencage.geocoder import OpenCageGeocode
+
+def get_coordinates(location):
+    api_key = '05b607c2126b4f12a76b0f84acc01091'
+    geocoder = OpenCageGeocode(api_key)
+    try:
+        result = geocoder.geocode(location)
+        if result and len(result):
+            return result[0]['geometry']['lat'], result[0]['geometry']['lng']
+        else:
+            return None, None
+    except Exception as e:
+        print(f"Error: {e}")
+        return None, None
+    
+def get_vector3(location):
+    lat, long = get_coordinates(location)
+    lat_rad = np.radians(lat)
+    long_rad = np.radians(long)
+
+    # Transformare în vectori 3D
+    x = np.cos(lat_rad) * np.cos(long_rad)
+    y = np.cos(lat_rad) * np.sin(long_rad)
+    z = np.sin(lat_rad)
+    return x, y, z
+
+
 
 # Încărcăm matricea interacțiunilor și datele procesate
 def load_data():
@@ -12,6 +40,92 @@ def load_data():
     interests_matrix = mlb.fit_transform(data_orig['Interests'].str.split())  # Split pe spațiu pentru a crea lista de interese
     interests_df = pd.DataFrame(interests_matrix, columns=mlb.classes_)
     return data, interactions_matrix, interests_df
+
+
+def identify_interest_columns(dataframe):
+            # Selectăm coloanele cu valori binare (0 și 1) care nu sunt categorice evidente
+    interest_columns = [
+        column for column in dataframe.columns
+        if dataframe[column].dropna().isin([0, 1]).all()  # Verifică dacă toate valorile sunt 0 sau 1
+        and column not in ["ID", "Gender", "Preferred_Gender"]
+    ]
+    return interest_columns
+
+def extract_interests(row, interests_columns):
+    interests = [interest for interest in interests_columns if row[interest] == 1]
+    return ", ".join(interests)  # Interesele vor fi returnate sub formă de string, separate prin virgulă
+
+def find_interests(user_id):
+    df = pd.read_csv('APA_PR\procesed_data.csv')
+
+    interests_columns = identify_interest_columns(df)
+    df["Interests"] = df.apply(lambda row: extract_interests(row, interests_columns), axis=1)
+    return df[df["ID"] == user_id]["Interests"].values[0]
+
+
+
+
+def add_user_in_data(new_user):
+    data,interactions_matrix,_ = load_data()
+    all_interests = list(data.columns[10:-3])
+
+    user_interest_list = [interest.strip() for interest in new_user["interest"].split(",")]
+
+    # Verificăm și actualizăm lista globală a intereselor
+    new_interests = set(user_interest_list) - set(all_interests)
+    print(f"Interese noi: {new_interests}")
+    for interest in new_interests:
+        data.insert(len(data.columns) - 4, interest, 0)
+
+    all_interests = list(data.columns[10:-3])
+
+    # Funcția care transformă interesele în format binar
+    def binarize_interests(user_interest, all_interests):
+        return [1 if interest in user_interest else 0 for interest in all_interests]
+
+    # Construim un rând pentru noul utilizator
+    new_user_row = [
+        new_user["ID"],
+        new_user["Gender"],
+        new_user["Age"],
+        new_user["Height"],
+        new_user["Hair_Color"],
+        new_user["Preferred_Gender"],
+        new_user["Location"],
+        new_user["Photo_Path"],
+        new_user["Age_Min"],
+        new_user["Age_Max"]
+    ] + binarize_interests(user_interest_list, all_interests) + [
+        new_user["Vector_X"],
+        new_user["Vector_Y"],
+        new_user["Vector_Z"]   
+    ]
+    # Actualizăm lista de coloane pentru a include noile coloane de interese
+    columns = [col for col in data.columns.tolist() if col not in ["Vector_X", "Vector_Y", "Vector_Z"]]
+    columns = columns + ["Vector_X", "Vector_Y", "Vector_Z"]
+
+    # Adăugăm noul utilizator în DataFrame
+    new_user_df = pd.DataFrame([new_user_row], columns=columns)
+    data = pd.concat([data, new_user_df], ignore_index=True)
+    data.to_csv('APA_PR/procesed_data.csv', index=False)
+    # Adaugă un nou rând la final
+    new_row = [0] * len(interactions_matrix.columns)  # Toate valorile sunt 0
+    interactions_matrix.loc[len(interactions_matrix) + 1] = new_row
+
+    # Adaugă o nouă coloană la final
+    new_column = [0] * len(interactions_matrix)  # Toate valorile sunt 0
+    interactions_matrix[len(interactions_matrix.columns) + 1] = new_column
+
+    # Salvează rezultatul înapoi într-un fișier CSV (opțional)
+    interactions_matrix.to_csv('APA_PR\interact.csv')
+
+
+
+
+
+
+
+
 
 def update_interaction_matrix(new_interaction):
     new_interaction.to_csv('APA_PR/interact.csv', index=False)

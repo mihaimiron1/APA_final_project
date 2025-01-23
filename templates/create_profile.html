@@ -88,7 +88,8 @@
     <div class="container">
         <div class="form-container">
             <h2>Create Your Profile</h2>
-            <form id="createProfileForm" enctype="multipart/form-data">
+            <form id="createProfileForm" action="/create_profile/{{ user_id }}" method="POST" enctype="multipart/form-data">
+
                 <!-- Name -->
                 <label for="first_name">First Name:</label>
                 <input type="text" id="first_name" name="first_name" required>
@@ -111,6 +112,14 @@
                 <!-- Interests -->
                 <label for="interests">Interests (comma-separated):</label>
                 <input type="text" id="interests" name="interests" placeholder="e.g., sports, music" required>
+
+
+                <label for="user_gender">Gender:</label>
+                <select id="user_gender" name="user_gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    
+                </select>
 
                 <!-- Preferred Gender -->
                 <label for="preferred_gender">Preferred Gender:</label>
@@ -136,34 +145,43 @@
                 <input type="file" id="photo" name="photo" accept="image/*" required>
 
                 <!-- Submit -->
+                
                 <button type="submit" class="btn-submit">Save Profile</button>
+                
             </form>
         </div>
     </div>
 
+    
     <script>
-        $(document).ready(function() {
-            $('#createProfileForm').submit(function(e) {
-                e.preventDefault(); // Previne trimiterea normală a formularului
-
-                var formData = new FormData(this);
-                
-                $.ajax({
-                    url: '/create_profile/{{ user_id }}',
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        alert('Profile saved successfully!');
-                        window.location.href = "/profile/{{ user_id }}"; // Redirecționare către profil
-                    },
-                    error: function(xhr, status, error) {
-                        alert('There was an error saving your profile.');
-                    }
-                });
+        document.getElementById('createProfileForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+    
+            var formData = new FormData(this);
+    
+            // Afișează un mesaj de încărcare
+            document.getElementById('loading-message').style.display = 'block';
+    
+            // Trimite datele către server
+            fetch('/create_profile/{{ user_id }}', {
+                method: 'POST',
+                body: formData
             });
+    
+            // După o mică întârziere, redirecționează utilizatorul
+            setTimeout(function() {
+                window.location.href = '/conect';
+            }, 20);
         });
     </script>
+    
+    <!-- Adaugă mesajul de încărcare în HTML -->
+    <div id="loading-message" style="display: none;">Saving your profile... Please wait.</div>
+    
+    
+    
+    
+    
+    
 </body>
 </html>

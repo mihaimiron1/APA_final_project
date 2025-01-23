@@ -1,2 +1,1 @@
-
-    if request.method == 'POST':
+dating_page

@@ -3,7 +3,7 @@ import json
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
-from backend.main import load_data, recommend_users_by_id, interact_with_recommended_users,  give_friends, calculate_similarity, get_vector3, add_user_in_data
+from backend.main import load_data, recommend_users_by_id, interact_with_recommended_users,  give_friends, calculate_similarity, get_vector3, add_user_in_data, find_interests
 
 from sklearn.preprocessing import MultiLabelBinarizer
 
@@ -56,8 +56,6 @@ def profil():
     data, _, _ = load_data()
     user_data = data[data['ID'] == user_id].iloc[0]
     
-    data_orig = pd.read_csv('APA_PR\dating_data.csv')
-    user_orig_info = data_orig[data_orig['ID'] == user_id].iloc[0]
 
 
     
@@ -68,7 +66,7 @@ def profil():
     location = user_data["Location"]
     photo_path = user_data["Photo_Path"]
     height = user_data["Height"]
-    interests = user_orig_info["Interests"]
+    interests = find_interests(user_id)
     
     if request.method == 'POST':
         # Actualizează profilul
@@ -145,58 +143,107 @@ def register():
             if user['Email'] == email:
                 flash("Acest email este deja înregistrat!", 'error')
                 return redirect(url_for('register'))
+        session['new_user_email'] = email
+        session['new_user_password'] = password
+        
 
-        new_user = {
-            'Email': email,
-            'Parola': password,
-            'Nume': '',
-            'Prenume': '',
-            'ID': len(users) + 1
-        }
-
-        users.append(new_user)
-        with open('login_users.json', 'w') as file:
-            json.dump({'users': users}, file, indent=4)
-
-        return redirect(url_for('create_profile', user_id=new_user['ID']))
+        return redirect(url_for('create_profile', user_id=len(users) + 1))
 
     return render_template('register.html')
 
+
+def save_users(data):
+    with open('login_users.json', 'w') as file:
+        json.dump(data, file, indent=4)
 
 
 
 @app.route('/create_profile/<int:user_id>', methods=['GET', 'POST'])
 def create_profile(user_id):
-    print(f"User ID: {user_id} - Route accessed")  # Check if route is accessed
-
     if request.method == 'POST':
-        print("POST method accessed")
+        try:
+            # Adună datele din formular
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
+            age = request.form['age']
+            height = request.form['height']
+            hair_color = request.form['hair_color']
+            interests = request.form['interests']  # Split după virgulă
+            user_gender = request.form['user_gender']
+            preferred_gender = request.form['preferred_gender']
+            age_min = request.form['min_age']
+            age_max = request.form['max_age']
+            location = request.form['location']
 
-        # Retrieve form data
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        age = request.form['age']
-        height = request.form['height']
-        hair_color = request.form['hair_color']
-        interests = request.form['interests'].split(",")  # Split interests by comma
-        preferred_gender = request.form['preferred_gender']
-        age_min = request.form['min_age']
-        age_max = request.form['max_age']
-        location = request.form['location']
+            print(f'Form Data Received: {first_name}, {last_name}, {age}, {height}, {hair_color}, {interests}, {user_gender}, {preferred_gender}, {age_min}, {age_max}, {location}')
+            
+            # Calculează vectorii de locație
+            vectorX, vectorY, vectorZ = get_vector3(location)
 
-        # Handling the uploaded photo
-        photo = request.files['photo']
-        photo_path = 'static/images/' + photo.filename
-        photo.save(photo_path)
+            # Convertește datele de gen
+            user_gender = 1 if user_gender == 'male' else 0
+            preferred_gender = 1 if preferred_gender == 'male' else 0
 
-        # Process user data, update, save to file, etc.
-        # (Your logic for processing and saving user data goes here)
+            # Manevrarea pozei
+            photo = request.files['photo']
+            photo_path = f'static/images/{photo.filename}'
+            photo.save(photo_path)
 
-        flash("Profile successfully created!", 'success')
-        return redirect(url_for('profile', user_id=user_id))
+            # Procesare utilizatori
+            users = load_users()
+            id_user_new = len(users) + 1
+            age = int(age)
+            height = int(height)
+            age_min = int(age_min)
+            age_max = int(age_max)
 
-    # For GET request, render the profile creation form
+            new_user = {
+                "ID": id_user_new,
+                "Age": age,
+                "Height": height,
+                "Hair_Color": hair_color,
+                "interest": interests,  # Interesele ca un singur string
+                "Preferred_Gender": preferred_gender,
+                "Gender": user_gender,
+                "Location": location,
+                "Photo_Path": photo_path,
+                "Age_Min": age_min,
+                "Age_Max": age_max,
+                "Vector_X": vectorX,
+                "Vector_Y": vectorY,
+                "Vector_Z": vectorZ
+            }
+
+            # Încearcă să adaugi utilizatorul
+            add_user_in_data(new_user)
+            
+            # Procesare date de login
+            email = session.get('new_user_email')
+            password = session.get('new_user_password')
+            new_user = {
+                'Email': email,
+                'Parola': password,
+                'Nume': last_name,
+                'Prenume': first_name,
+                'ID': id_user_new
+            }
+
+            users.append(new_user)
+            with open('login_users.json', 'w') as file:
+                json.dump({'users': users}, file, indent=4)
+
+            print(f"User {id_user_new} successfully added!")
+            return '', 204
+
+        except Exception as e:
+            print(f"Error saving profile for user {user_id}: {e}")
+            # Dacă apare o eroare, returnează codul 500 (Internal Server Error)
+            return 'Internal Server Error', 500
+
+    # GET request - afișează formularul
     return render_template('create_profile.html', user_id=user_id)
+
+
 
 
 
@@ -219,7 +266,7 @@ def login():
             return redirect(url_for('dating_page'))  # Redirect to dating page
         else:
             flash("Email sau parolă incorectă!", 'error')
-    return render_template('conect.html')
+    return render_template('conect.html')  # Sau logica pentru conectare
 
 
 @app.route('/dating_page', methods=['GET', 'POST'])
@@ -234,8 +281,7 @@ def dating_page():
     data, interactions_matrix, interests_df = load_data()
     similarity_matrix = calculate_similarity(data, interests_df)
     recommended_user = recommend_users_by_id(user_id, data, similarity_matrix, interactions_matrix)
-    print(f"Recommended Users: {recommended_user[0]['ID']}")
-    print(f"Recommended Users: {recommended_user[0]['Photo_Path']}")  
+    
 
     if not recommended_user:
         return jsonify({"error": "No recommended users found."}), 404
